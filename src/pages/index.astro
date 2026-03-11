@@ -1,12 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLatestTftCdnVersion } from "../scripts/links.js";
-import { components, itemTable } from "../scripts/itemTable.js";
 import ItemSelector from "../components/ItemSelector.jsx";
 
 const cdnVersion = await getLatestTftCdnVersion();
-console.log(components.get("bow"));
-console.log(itemTable.get("bow")?.get("rod"));
 ---
 
 <BaseLayout pageTitle="TFT Item Economy Tool">

@@ -2,37 +2,39 @@ import { useState } from "react";
 import { tftCdnBaseUrl, tftImagesUrl } from "../scripts/links";
 import { components, itemTable } from "../scripts/itemTable.js";
 
-export function ItemSelector({ cdnVersion }) {
-  const [leftComponent, setLeftComponent] = useState("bow");
-  const [rightComponent, setRightComponent] = useState("bow");
-
-  const handleComponentChange = (isLeftComponent, newComponent) => {
-    if (isLeftComponent) {
-      setLeftComponent(newComponent);
-    } else {
-      setRightComponent(newComponent);
-    }
-  };
-
+export function ComponentSelector({ labelText, name, value, onChange }) {
   return (
     <>
       <label>
-        Select a component:
-      <select name="leftComponent" value={leftComponent} onChange={(e) => handleComponentChange(true, e.target.value)}>
+        {labelText}
+      <select name={name} value={value} onChange={(e) => onChange(e.target.value)}>
         {components.keys().map((key) => (
           <option value={key} key={key}>{key}</option>
         ))}
       </select>
       </label>
-      <label>
-        Select another component:
-        <select name="rightComponent" value={rightComponent} onChange={(e) => handleComponentChange(false, e.target.value)}>
-          {components.keys().map((key) => (
-            <option value={key} key={key}>{key}</option>
-          ))}
-        </select>
-      </label>
+    </>
+  );
+}
 
+export function ItemSelector({ cdnVersion }) {
+  const [leftComponent, setLeftComponent] = useState("bow");
+  const [rightComponent, setRightComponent] = useState("bow");
+
+  return (
+    <>
+      <ComponentSelector
+        labelText="Select a component:"
+        name="leftComponent"
+        value={leftComponent}
+        onChange={setLeftComponent}
+      />
+      <ComponentSelector
+        labelText="Select another component:"
+        name="rightComponent"
+        value={rightComponent}
+        onChange={setRightComponent}
+      />
       <div>
         <img src={`${tftCdnBaseUrl}/${cdnVersion}/${tftImagesUrl}/${components.get(leftComponent)}.png`} />
         <p>+</p>
