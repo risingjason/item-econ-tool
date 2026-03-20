@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLatestTftCdnVersion } from "../scripts/links.js";
 import ItemSelector from "../components/ItemSelector.jsx";
+import ComponentMinigame from "../components/ComponentMinigame.jsx";
 
 const cdnVersion = await getLatestTftCdnVersion();
 ---
@@ -10,4 +11,5 @@ const cdnVersion = await getLatestTftCdnVersion();
 	<h1>Item Economy</h1>
 	<h1>{cdnVersion}</h1>
 	<ItemSelector cdnVersion={cdnVersion} client:only="react" />
+	<ComponentMinigame client:only="react" />
 </BaseLayout>
